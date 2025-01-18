@@ -6,12 +6,8 @@ export const allContacts = async () => {
 };
 
 export const contactById = async (contactId) => {
-  try {
-    const contact = await СontactsCollection.findById(contactId);
-    return contact;
-  } catch (error) {
-    console.error(error);
-  }
+  const contact = await СontactsCollection.findById(contactId);
+  return contact;
 };
 
 export const additionContact = async (payload) => {
@@ -20,14 +16,10 @@ export const additionContact = async (payload) => {
 };
 
 export const deleteContact = async (contactId) => {
-  try {
-    const contact = await СontactsCollection.findOneAndDelete({
-      _id: contactId,
-    });
-    return contact;
-  } catch (error) {
-    console.error(error);
-  }
+  const contact = await СontactsCollection.findOneAndDelete({
+    _id: contactId,
+  });
+  return contact;
 };
 
 export const updateContact = async (contactId, payload, options = {}) => {
