@@ -38,12 +38,14 @@ router.post(
 
 router.put(
   '/contacts/:contactId',
+  isValidId,
   validateBody(validationContactShema),
   ctrlWrapper(upsertContactController),
 );
 
 router.patch(
   '/contacts/:contactId',
+  isValidId,
   validateBody(validationUpdateContactShema),
   ctrlWrapper(patchContactController),
 );

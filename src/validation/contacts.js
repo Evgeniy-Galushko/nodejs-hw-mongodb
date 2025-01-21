@@ -19,7 +19,7 @@ export const validationContactShema = Joi.object({
     'string.max': 'The maximum number of characters in an email is 20!',
     'any.required': 'Email is required!',
   }),
-  isFavorite: Joi.boolean().default(false).required().messages({
+  isFavourite: Joi.boolean().required().default(false).messages({
     'string.base': 'Set the value to false or true!',
     'any.required': 'Favorite is required!',
   }),
@@ -49,7 +49,7 @@ export const validationUpdateContactShema = Joi.object({
     'string.min': 'Minimum number of characters in email is 3!',
     'string.max': 'The maximum number of characters in an email is 20!',
   }),
-  isFavorite: Joi.boolean().default(false).messages({
+  isFavourite: Joi.boolean().default(false).messages({
     'string.base': 'Set the value to false or true!',
   }),
   contactType: Joi.string()
