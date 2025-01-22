@@ -9,13 +9,14 @@ const parseContactType = (type) => {
 };
 
 const parseIsFavourite = (boolean) => {
-  const isBoolian = typeof boolean === 'boolean';
+  const bool = JSON.parse(boolean);
+  const isBoolian = typeof bool === 'boolean';
 
   if (!isBoolian) return;
 
   const isFavourite = (bool) => [false, true].includes(bool);
 
-  if (isFavourite(boolean)) return boolean;
+  if (isFavourite(bool)) return bool;
 };
 
 export const parseFilterParams = (query) => {
