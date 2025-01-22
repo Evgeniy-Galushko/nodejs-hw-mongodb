@@ -9,6 +9,8 @@ const parseContactType = (type) => {
 };
 
 const parseIsFavourite = (boolean) => {
+  if (!boolean) return;
+
   const bool = JSON.parse(boolean);
   const isBoolian = typeof bool === 'boolean';
 
