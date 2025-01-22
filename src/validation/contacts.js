@@ -13,7 +13,7 @@ export const validationContactShema = Joi.object({
     'string.max': 'The maximum number of digits in a number must be 20!',
     'any.required': 'Phone number is required!',
   }),
-  email: Joi.string().min(3).max(20).required().messages({
+  email: Joi.string().min(3).max(30).required().messages({
     'string.base': 'Email must be a string!',
     'string.min': 'Minimum number of characters in email is 3!',
     'string.max': 'The maximum number of characters in an email is 20!',
@@ -44,7 +44,7 @@ export const validationUpdateContactShema = Joi.object({
     'string.min': 'The minimum number of digits in the number must be 7!',
     'string.max': 'The maximum number of digits in a number must be 20!',
   }),
-  email: Joi.string().min(3).max(20).messages({
+  email: Joi.string().min(3).max(30).messages({
     'string.base': 'Email must be a string!',
     'string.min': 'Minimum number of characters in email is 3!',
     'string.max': 'The maximum number of characters in an email is 20!',

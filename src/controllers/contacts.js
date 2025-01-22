@@ -7,10 +7,17 @@ import {
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const contactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
-  const contacts = await allContacts({ page, perPage });
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+
+  const contacts = await allContacts({ page, perPage, sortBy, sortOrder });
+
+  if (page > contacts.totalPages) {
+    throw createHttpError(404, 'There is no such page');
+  }
 
   res.json({
     status: 200,
@@ -20,6 +27,7 @@ export const contactsController = async (req, res) => {
       page: contacts.page,
       perPage: contacts.perPage,
       totalItems: contacts.totalItems,
+      totalPages: contacts.totalPages,
       hasPreviousPage: contacts.hasPreviousPage,
       hasNextPage: contacts.hasNextPage,
     },
