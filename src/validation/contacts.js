@@ -31,6 +31,7 @@ export const validationContactShema = Joi.object({
       'string.base': 'Contact type must be a string!',
       'any.required': 'Contact type is required!',
     }),
+  userId: Joi.string(),
 });
 
 export const validationUpdateContactShema = Joi.object({

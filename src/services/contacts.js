@@ -2,6 +2,7 @@ import { СontactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
 export const allContacts = async ({
+  req,
   page,
   perPage,
   sortBy,
@@ -11,7 +12,9 @@ export const allContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  const contactsQuery = СontactsCollection.find();
+  const contactsQuery = СontactsCollection.find({
+    userId: req.user._id,
+  });
   if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
@@ -34,13 +37,19 @@ export const allContacts = async ({
   return { data: contacts, ...paginationData };
 };
 
-export const contactById = async (contactId) => {
-  const contact = await СontactsCollection.findById(contactId);
+export const contactById = async (contactId, req) => {
+  const contact = await СontactsCollection.find({
+    userId: req.user._id,
+    _id: contactId,
+  });
   return contact;
 };
 
 export const additionContact = async (payload) => {
-  const contact = await СontactsCollection.create(payload);
+  const contact = await СontactsCollection.create({
+    ...payload.body,
+    userId: payload.user._id,
+  });
   return contact;
 };
 
@@ -54,7 +63,7 @@ export const deleteContact = async (contactId) => {
 export const updateContact = async (contactId, payload, options = {}) => {
   const updatedСontact = await СontactsCollection.findOneAndUpdate(
     { _id: contactId },
-    payload,
+    payload.body,
     {
       new: true,
       includeResultMetadata: true,
