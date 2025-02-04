@@ -45,10 +45,11 @@ export const contactById = async (contactId, req) => {
   return contact;
 };
 
-export const additionContact = async (payload) => {
+export const additionContact = async (payload, url) => {
   const contact = await СontactsCollection.create({
     ...payload.body,
     userId: payload.user._id,
+    photo: url,
   });
   return contact;
 };
@@ -71,7 +72,7 @@ export const updateContact = async (contactId, payload, options = {}) => {
       ...options,
     },
   );
-
+  // console.log(options);
   if (!updatedСontact || !updatedСontact.value) return null;
 
   return {

@@ -13,6 +13,7 @@ import { validationContactShema } from '../validation/contacts.js';
 import { validationUpdateContactShema } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/mulre.js';
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.get('/:contactId', isValidId, ctrlWrapper(contactsByIdController));
 
 router.post(
   '/',
+  upload.single('photo'),
   validateBody(validationContactShema),
   ctrlWrapper(additionContactController),
 );
@@ -38,6 +40,7 @@ router.post(
 router.put(
   '/:contactId',
   isValidId,
+  upload.single('photo'),
   validateBody(validationContactShema),
   ctrlWrapper(upsertContactController),
 );
@@ -45,6 +48,7 @@ router.put(
 router.patch(
   '/:contactId',
   isValidId,
+  upload.single('photo'),
   validateBody(validationUpdateContactShema),
   ctrlWrapper(patchContactController),
 );
