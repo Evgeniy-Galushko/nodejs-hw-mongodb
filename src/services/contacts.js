@@ -62,17 +62,22 @@ export const deleteContact = async (contactId, req) => {
   return contact;
 };
 
-export const updateContact = async (contactId, payload, options = {}) => {
+export const updateContact = async (
+  contactId,
+  userId,
+  payload,
+  options = {},
+) => {
   const updatedСontact = await СontactsCollection.findOneAndUpdate(
-    { userId: payload.user._id, _id: contactId },
-    payload.body,
+    { userId, _id: contactId },
+    payload,
     {
       new: true,
       includeResultMetadata: true,
       ...options,
     },
   );
-  // console.log(options);
+
   if (!updatedСontact || !updatedСontact.value) return null;
 
   return {

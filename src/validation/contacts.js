@@ -32,7 +32,7 @@ export const validationContactShema = Joi.object({
       'any.required': 'Contact type is required!',
     }),
   userId: Joi.string(),
-  photo: Joi.string,
+  photo: Joi.string(),
 });
 
 export const validationUpdateContactShema = Joi.object({
@@ -60,5 +60,5 @@ export const validationUpdateContactShema = Joi.object({
     .messages({
       'string.base': 'Contact type must be a string!',
     }),
-  photo: Joi.string,
+  photo: Joi.string(),
 });

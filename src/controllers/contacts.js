@@ -115,6 +115,7 @@ export const upsertContactController = async (req, res, next) => {
 
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
+  const { _id: userId } = req.user;
 
   const photo = req.file;
 
@@ -127,7 +128,7 @@ export const patchContactController = async (req, res, next) => {
     }
   }
 
-  const result = await updateContact(contactId, req, {
+  const result = await updateContact(contactId, userId, {
     ...req.body,
     photo: photoUrl,
   });
@@ -140,7 +141,6 @@ export const patchContactController = async (req, res, next) => {
   res.status(200).json({
     status: 200,
     message: 'Successfully upserted a contact!',
-    // data: { ...result.contact._doc, photo: photoUrl },
     data: result.contact,
   });
 };
