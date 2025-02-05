@@ -27,23 +27,27 @@ export const contactsController = async (req, res) => {
     filter,
   });
 
-  if (page > contacts.totalPages) {
-    throw createHttpError(404, 'There is no such page');
-  }
-
-  res.json({
-    status: 200,
-    message: 'Successfully found contacts!',
-    data: {
-      data: contacts.data,
-      page: contacts.page,
-      perPage: contacts.perPage,
-      totalItems: contacts.totalItems,
-      totalPages: contacts.totalPages,
-      hasPreviousPage: contacts.hasPreviousPage,
-      hasNextPage: contacts.hasNextPage,
-    },
-  });
+  contacts.data.length === 0
+    ? res.json({
+        status: 200,
+        message: 'You have no contacts',
+        data: {
+          data: contacts.data,
+        },
+      })
+    : res.json({
+        status: 200,
+        message: 'Successfully found contacts!',
+        data: {
+          data: contacts.data,
+          page: contacts.page,
+          perPage: contacts.perPage,
+          totalItems: contacts.totalItems,
+          totalPages: contacts.totalPages,
+          hasPreviousPage: contacts.hasPreviousPage,
+          hasNextPage: contacts.hasNextPage,
+        },
+      });
 };
 
 export const contactsByIdController = async (req, res) => {
