@@ -1,5 +1,6 @@
 import { THIRTY_DAYS } from '../constants/index.js';
 import {
+  loginOrSignupWithGoogle,
   loginUser,
   logoutUser,
   refreshUsersSession,
@@ -7,6 +8,7 @@ import {
   resetPassword,
   sendResetToken,
 } from '../services/auth.js';
+import { generateAuthUrl } from '../utils/googleAuth.js';
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -90,5 +92,29 @@ export const resetPasswordController = async (req, res) => {
     status: 200,
     message: 'Password has been successfully reset.',
     data: {},
+  });
+};
+
+export const getGoogleAuthUrlController = async (req, res) => {
+  const url = generateAuthUrl();
+
+  res.json({
+    status: 200,
+    message: 'Successfully get Google OAuth url!',
+    data: { url: url },
+  });
+};
+
+export const loginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+
+  setupSession(res, session);
+
+  res.json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
+    },
   });
 };
