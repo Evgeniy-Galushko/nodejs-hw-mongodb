@@ -5,14 +5,26 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: <опис вашого додатку>
+  description: Accompanying documentation for working with the roller's contacts.
 tags:
   # теги, що ви будете використовувати
 servers:
   - url: http://localhost:3000
-  - url: #посилання на задеплоєний сайт
+  # - url: #посилання на задеплоєний сайт
 paths:
-  # тут будуть посилання на ендпоінти
+  /contacts:
+    get:
+      $ref: ../docs/swagger/paths/contacts/get.yaml
+    post:
+      $ref: ../docs/swagger/paths/contacts/post.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../docs/swagger/paths/contacts/{id}/get.yaml
+    patch:
+      $ref: ../docs/swagger/paths/contacts/{id}/patch.yaml
+    delete:
+      $ref: ../docs/swagger/paths/contacts/{id}/delete.yaml
+
 components:
   securitySchemes:
     bearerAuth:

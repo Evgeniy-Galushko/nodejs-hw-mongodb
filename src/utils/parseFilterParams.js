@@ -4,7 +4,6 @@ const parseContactType = (type) => {
   if (!isString) return;
 
   const isType = (type) => ['work', 'home', 'personal'].includes(type);
-  console.log();
 
   if (isType(type)) return type;
 };
