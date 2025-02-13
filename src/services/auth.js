@@ -82,8 +82,6 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     refreshToken,
   });
 
-  console.log(session);
-
   if (!session) {
     throw createHttpError(401, 'Session token found');
   }
@@ -184,6 +182,8 @@ export const resetPassword = async (payload) => {
 export const loginOrSignupWithGoogle = async (code) => {
   const loginTicket = await validateCode(code);
   const payload = loginTicket.getPayload();
+
+  console.log(payload);
 
   if (!payload) {
     throw createHttpError(401);

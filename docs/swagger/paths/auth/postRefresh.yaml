@@ -1,0 +1,76 @@
+tags:
+  - User
+summary: Refresh session token
+operationId: getUser
+description: Refresh session token
+security:
+  - bearerAuth: []
+# requestBody:
+#   content:
+#     application/json:
+#       schema:
+#         type: object
+#         required:
+#           - email
+#           - password
+#         properties:
+#           email:
+#             description: 'user email'
+#             example: 'johnWick@gmail.com'
+#             type: string
+#           password:
+#             description: 'user password'
+#             type: string
+#             example: '123456W_o'
+responses:
+  '200':
+    description: Login to your account
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - daata
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully refreshed a session!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  description: 'token session'
+                  type: string
+                  example: jEW/00ArjAoVzPuWgUyA0ynydMDa7cdZJcRSdx+W
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: UnauthorizedError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Session token found'

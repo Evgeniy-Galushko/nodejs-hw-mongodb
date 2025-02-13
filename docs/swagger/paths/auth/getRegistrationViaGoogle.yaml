@@ -1,0 +1,91 @@
+tags:
+  - User
+summary: Adding a new user
+operationId: createGoogleUser
+description: Adding a new user
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - email
+          - password
+        properties:
+          name:
+            description: 'user name'
+            type: string
+            example: 'John Wick'
+          email:
+            description: 'user email'
+            example: 'johnWick@gmail.com'
+            type: string
+          password:
+            description: 'user password'
+            type: string
+            example: '123456W_o'
+responses:
+  '201':
+    description: Creates a new user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - daata
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully registered a user!
+            data:
+              type: object
+              required:
+                - name
+                - email
+                - _id
+              properties:
+                name:
+                  description: 'user name'
+                  type: string
+                  example: 'John Wick'
+                email:
+                  description: 'user email'
+                  type: string
+                  example: 'johnWick@gmail.com'
+                _id:
+                  description: 'user id'
+                  type: string
+                  example: 67a5eab29aa777da94208ad1
+  '409':
+    description: ConflictError
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: ConflictError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Email in use'
