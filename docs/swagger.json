@@ -12,6 +12,9 @@
   "servers": [
     {
       "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://nodejs-hw-mongodb-4-5trl.onrender.com"
     }
   ],
   "tags": [
@@ -560,9 +563,9 @@
         "tags": [
           "User"
         ],
-        "summary": "Adding a new user",
+        "summary": "Registration via google mail",
         "operationId": "createUser",
-        "description": "Adding a new user",
+        "description": "Registration via google mail",
         "security": [
           {
             "bearerAuth": []
@@ -574,25 +577,13 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "name",
-                  "email",
-                  "password"
+                  "email"
                 ],
                 "properties": {
-                  "name": {
-                    "description": "user name",
-                    "type": "string",
-                    "example": "John Wick"
-                  },
                   "email": {
                     "description": "user email",
                     "example": "johnWick@gmail.com",
                     "type": "string"
-                  },
-                  "password": {
-                    "description": "user password",
-                    "type": "string",
-                    "example": "123456W_o"
                   }
                 }
               }
@@ -600,7 +591,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Creates a new user",
             "content": {
               "application/json": {
@@ -614,71 +605,22 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 201
+                      "example": 200
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully registered a user!"
+                      "example": "Successfully get Google OAuth url!"
                     },
                     "data": {
                       "type": "object",
                       "required": [
-                        "name",
-                        "email",
-                        "_id"
+                        "url"
                       ],
                       "properties": {
-                        "name": {
-                          "description": "user name",
+                        "url": {
+                          "description": "registration link",
                           "type": "string",
-                          "example": "John Wick"
-                        },
-                        "email": {
-                          "description": "user email",
-                          "type": "string",
-                          "example": "johnWick@gmail.com"
-                        },
-                        "_id": {
-                          "description": "user id",
-                          "type": "string",
-                          "example": "67a5eab29aa777da94208ad1"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "ConflictError",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 409
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "ConflictError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "required": [
-                        "message"
-                      ],
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Email in use"
+                          "example": "https://accounts.google.com/o/oauth2/v2/auth?scope=htt2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=1029686607625-v9p2buee22qr9r1skd5sa9saah55237h.apps.googleusntent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fconfirm-google-auth"
                         }
                       }
                     }
@@ -1132,6 +1074,218 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/auth/get-oauth-url": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Adding a new user",
+        "operationId": "createGoogleUser",
+        "description": "Adding a new user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "user name",
+                    "type": "string",
+                    "example": "John Wick"
+                  },
+                  "email": {
+                    "description": "user email",
+                    "example": "johnWick@gmail.com",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "user password",
+                    "type": "string",
+                    "example": "123456W_o"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "daata"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "name",
+                        "email",
+                        "_id"
+                      ],
+                      "properties": {
+                        "name": {
+                          "description": "user name",
+                          "type": "string",
+                          "example": "John Wick"
+                        },
+                        "email": {
+                          "description": "user email",
+                          "type": "string",
+                          "example": "johnWick@gmail.com"
+                        },
+                        "_id": {
+                          "description": "user id",
+                          "type": "string",
+                          "example": "67a5eab29aa777da94208ad1"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "ConflictError",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "ConflictError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Email in use"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth//confirm-oauth": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Google login",
+        "operationId": "addGoogleUser",
+        "description": "Google login",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "code"
+                ],
+                "properties": {
+                  "code": {
+                    "description": "user authorization code",
+                    "example": "j4/0ASVgi3Iyh-vN-g1sC5qpM1Fo_b7SШЩШррRTREH4xeD5Hv1lQQHLWdcm2eTIKX3zEMIHbAlyPZgq9w",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login to your account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "daata"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in via Google OAuth!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "description": "token session",
+                          "type": "string",
+                          "example": "jEW/00ArjAoVzPuWgUyA0ynydMDa7cdZJcRSdx+W"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       }
