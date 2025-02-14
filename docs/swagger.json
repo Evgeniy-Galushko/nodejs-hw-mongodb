@@ -507,29 +507,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deleting a contact",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Сontact deleted."
-                    }
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "Deleting a contact"
           },
           "404": {
             "description": "NotFoundError",

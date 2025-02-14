@@ -94,10 +94,7 @@ export const deleteContactController = async (req, res, next) => {
     return;
   }
 
-  res.status(200).json({
-    status: 200,
-    message: 'Сontact deleted.',
-  });
+  res.status(204).send();
 };
 
 export const upsertContactController = async (req, res, next) => {
