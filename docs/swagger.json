@@ -244,7 +244,7 @@
                   "photo": {
                     "description": "Link to contact photo.",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dlnpzvvwq/image/upload/v1739272354/ohw4hguynz0twdlbtr4j.jpg"
+                    "format": "binary"
                   }
                 }
               }
@@ -404,15 +404,10 @@
                       "personal"
                     ]
                   },
-                  "userId": {
-                    "description": "id user",
-                    "type": "string",
-                    "example": "679caa1c660cc782ac027e03"
-                  },
                   "photo": {
                     "description": "Link to contact photo.",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/dlnpzvvwq/image/upload/v1739272354/ohw4hguynz0twdlbtr4j.jpg"
+                    "format": "binary"
                   }
                 }
               }
@@ -512,10 +507,28 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Deleting a contact",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Сontact deleted."
+                    }
+                  }
+                }
+              }
             }
           },
           "404": {
