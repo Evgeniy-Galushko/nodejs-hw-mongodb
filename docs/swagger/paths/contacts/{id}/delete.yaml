@@ -1,0 +1,56 @@
+tags:
+  - Contacts
+summary: Deleting a contact
+operationId: deleteContactId
+description: 'Deleting a contact'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '67a9f57c950dcf1f1727a561'
+responses:
+  '204':
+    description: 'Deleting a contact'
+    # content:
+    #   application/json:
+    #     schema:
+    #       type: object
+    #       required:
+    #         - status
+    #         - message
+    #       properties:
+    #         status:
+    #           type: integer
+    #           example: 204
+    #         message:
+    #           type: string
+    #           example: Сontact deleted.
+  '404':
+    description: NotFoundError
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Contact not found'

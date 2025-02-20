@@ -1,0 +1,58 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contacts
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: Accompanying documentation for working with the roller's contacts.
+tags:
+  - name: Contacts
+    description: Operations about users.
+  - name: User
+    description: User registration
+servers:
+  - url: http://localhost:3000
+  - url: https://nodejs-hw-mongodb-4-5trl.onrender.com
+paths:
+  /contacts:
+    get:
+      $ref: ../docs/swagger/paths/contacts/get.yaml
+    post:
+      $ref: ../docs/swagger/paths/contacts/post.yaml
+  /contacts/{id}:
+    get:
+      $ref: ../docs/swagger/paths/contacts/{id}/get.yaml
+    patch:
+      $ref: ../docs/swagger/paths/contacts/{id}/patch.yaml
+    delete:
+      $ref: ../docs/swagger/paths/contacts/{id}/delete.yaml
+  /auth/register:
+    post:
+      $ref: ../docs/swagger/paths/auth/postRegister.yaml
+  /auth/login:
+    post:
+      $ref: ../docs/swagger/paths/auth/postLogin.yaml
+  /auth/refresh:
+    post:
+      $ref: ../docs/swagger/paths/auth/postRefresh.yaml
+  /auth/logout:
+    post:
+      $ref: ../docs/swagger/paths/auth/postLogout.yaml
+  /auth/send-reset-email:
+    post:
+      $ref: ../docs/swagger/paths/auth/postSendResetEmail.yaml
+  /auth/reset-pwd:
+    post:
+      $ref: ../docs/swagger/paths/auth/postResetPwd.yaml
+  /auth/get-oauth-url:
+    get:
+      $ref: ../docs/swagger/paths/auth/getRegistrationViaGoogle.yaml
+  /auth//confirm-oauth:
+    post:
+      $ref: ../docs/swagger/paths/auth/postGoogleLogin.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

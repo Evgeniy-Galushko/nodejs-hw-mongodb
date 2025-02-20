@@ -1,0 +1,81 @@
+tags:
+  - User
+summary: Login to your account
+operationId: addUser
+description: Login to your account
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: 'user email'
+            example: 'johnWick@gmail.com'
+            type: string
+          password:
+            description: 'user password'
+            type: string
+            example: '123456W_o'
+responses:
+  '200':
+    description: Login to your account
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - daata
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully logged in an user!
+            data:
+              type: object
+              required:
+                - name
+                - accessToken
+              properties:
+                name:
+                  description: 'user name'
+                  type: string
+                  example: 'John Wick'
+                accessToken:
+                  description: 'token session'
+                  type: string
+                  example: jEW/00ArjAoVzPuWgUyA0ynydMDa7cdZJcRSdx+W
+  '404':
+    description: There is no such user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'User not found'

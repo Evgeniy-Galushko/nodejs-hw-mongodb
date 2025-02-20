@@ -1,0 +1,48 @@
+tags:
+  - User
+summary: Google login
+operationId: addGoogleUser
+description: Google login
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - code
+        properties:
+          code:
+            description: 'user authorization code'
+            example: 'j4/0ASVgi3Iyh-vN-g1sC5qpM1Fo_b7SШЩШррRTREH4xeD5Hv1lQQHLWdcm2eTIKX3zEMIHbAlyPZgq9w'
+            type: string
+responses:
+  '200':
+    description: Login to your account
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - daata
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully logged in via Google OAuth!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  description: 'token session'
+                  type: string
+                  example: jEW/00ArjAoVzPuWgUyA0ynydMDa7cdZJcRSdx+W
+  '401':
+    $ref: ../../components/responses/401.yaml

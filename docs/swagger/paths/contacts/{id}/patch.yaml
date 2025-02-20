@@ -1,0 +1,102 @@
+tags:
+  - Contacts
+summary: Editing a contact
+operationId: patchContact
+description: 'Editing a contact'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '67a9f57c950dcf1f1727a561'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        # required:
+        #   - name
+        #   - phoneNumber
+        #   - email
+        #   - isFavourite
+        #   - contactType
+        #   - userId
+        #   - photo
+        properties:
+          name:
+            description: 'contact name'
+            type: string
+            example: 'John Wick'
+          phoneNumber:
+            description: 'contact number'
+            example: '999999999999999'
+            type: string
+          email:
+            description: 'contact email'
+            example: 'johnWick@gmail.com'
+            type: string
+          isFavourite:
+            description: 'favourite contact'
+            example: true
+            type: boolean
+          contactType:
+            description: 'contact type'
+            type: string
+            enum: ['work', 'home', 'personal']
+          # userId:
+          #   description: 'id user'
+          #   type: string
+          #   example: 679caa1c660cc782ac027e03
+          photo:
+            description: 'Link to contact photo.'
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Creates contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - daata
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a contact!
+            data:
+              type: object
+              $ref: ../../../components/schemas/contacts.yaml
+  '404':
+    description: Unauthorized error
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Contact not found'
